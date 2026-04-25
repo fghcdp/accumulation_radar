@@ -65,8 +65,8 @@
 git clone https://github.com/connectfarm1/accumulation-radar.git
 cd accumulation-radar
 
-# Python 3.8+ 即可，唯一依赖是 requests
-pip install requests
+# Python 3.8+ 即可
+pip install -r requirements.txt
 
 # 配置 Telegram 推送（可选）
 cp .env.example .env.oi
@@ -82,23 +82,23 @@ cp .env.example .env.oi
 
 ```bash
 # 每天跑一次：全市场535合约扫描收筹标的池
-python3 accumulation_radar.py pool
+python -m accumulation_radar pool
 
 # 每小时跑一次：三策略评分 + OI异动监控
-python3 accumulation_radar.py oi
+python -m accumulation_radar oi
 
 # 全部都跑
-python3 accumulation_radar.py full
+python -m accumulation_radar full
 ```
 
 ### 推荐 Crontab 配置
 
 ```crontab
 # 每天10:00更新收筹标的池
-0 10 * * *  cd /path/to/accumulation-radar && python3 accumulation_radar.py pool >> accumulation.log 2>&1
+0 10 * * *  cd /path/to/accumulation-radar && python -m accumulation_radar pool >> accumulation.log 2>&1
 
 # 每小时:30扫描OI异动+三策略评分
-30 * * * *  cd /path/to/accumulation-radar && python3 accumulation_radar.py oi >> accumulation_oi.log 2>&1
+30 * * * *  cd /path/to/accumulation-radar && python -m accumulation_radar oi >> accumulation_oi.log 2>&1
 ```
 
 ## 推送示例
