@@ -24,6 +24,14 @@ logger = logging.getLogger(__name__)
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "")
 TG_CHAT_ID = os.getenv("TG_CHAT_ID", "")
 
+# === Email (QQ邮箱) ===
+EMAIL_ENABLE = os.getenv("EMAIL_ENABLE", "false").lower() == "true"
+EMAIL_SENDER = os.getenv("EMAIL_SENDER", "")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "")
+EMAIL_RECIPIENTS = [e.strip() for e in os.getenv("EMAIL_RECIPIENTS", "").split(",") if e.strip()]
+EMAIL_SMTP_SERVER = os.getenv("EMAIL_SMTP_SERVER", "smtp.qq.com")
+EMAIL_SMTP_PORT = int(os.getenv("EMAIL_SMTP_PORT", "587"))
+
 # === API ===
 FAPI = "https://fapi.binance.com"
 DB_PATH = Path(__file__).resolve().parent.parent / "accumulation.db"
