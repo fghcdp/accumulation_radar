@@ -11,7 +11,7 @@ from .scanner import scan_accumulation_pool
 from .market import fetch_market_data, fetch_heat_data, scan_oi_history, build_coin_data
 from .strategy import score_chase, score_combined, score_ambush
 from .report import build_pool_report, build_strategy_report
-from .notify import send_telegram
+from .notify import send_telegram, notify
 
 
 def run_pool(conn):
@@ -21,7 +21,7 @@ def run_pool(conn):
         save_watchlist(conn, results)
         report = build_pool_report(results)
         if report:
-            send_telegram(report)
+            notify(report)
 
 
 def run_oi(conn):
@@ -64,7 +64,7 @@ def run_oi(conn):
 
     # 5. 生成报告并推送
     report = build_strategy_report(coin_data, chase, combined, ambush)
-    send_telegram(report)
+    notify(report)
 
 
 def main():
